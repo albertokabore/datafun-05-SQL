@@ -7,7 +7,7 @@ Title : Specification for Project 5 SQL Module
 Albert Kabore, May 28, 2024
 
 ## Overview
-## Project 5 integrates Python and SQL, focusing on database interactions using SQLite. This project introduces logging, a useful tool for debugging and monitoring projects, and involves creating and managing a database, building a schema, and performing various SQL operations, including queries with joins, filters, and aggregations.
+## This project focuses on database interactions using SQLite, combining the power of Python and SQL. It introduces logging as a useful tool for debugging and monitoring. The project involves creating and managing a database, building a schema, and performing various SQL operations, including queries with joins, filters, and aggregations.
 
 ## Objectives
 ## Create a Python script that demonstrates the ability to interact with a SQL database, including creating a database, defining a schema, and executing various SQL commands. Incorporate logging to document the process and provide user feedback.
