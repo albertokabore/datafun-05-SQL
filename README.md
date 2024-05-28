@@ -12,12 +12,15 @@ Albert Kabore, May 28, 2024
 ## Objectives
 ## Create a Python script that demonstrates the ability to interact with a SQL database, including creating a database, defining a schema, and executing various SQL commands. Incorporate logging to document the process and provide user feedback.
 
-Create GitHub Repository and clone to VS Code
-#create GitHub repository
+## Create GitHub Repository and clone to VS Code
+# create GitHub repository
 
  GitHub Repository: datafun-05-sql
- Documentation: README.md
-#clone to VS Code
+ ## Documentation: README.md
+## clone to VS Code
+```powershell
+git clone https://github.com/albertokabore/datafun-05-SQL
+```
 
 ```powershell
 git clone site_URL
