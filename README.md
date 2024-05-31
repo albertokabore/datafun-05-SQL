@@ -52,6 +52,7 @@ Add book_manager.py file to create a database, and fill with inofrmation from CS
 Implement SQL statements and queries to perform additional operations and use Python to execute SQL statements.
 
 1.	Create create_tables.sql
+```
 CREATE TABLE authors (
     author_id TEXT PRIMARY KEY,
     first TEXT,
@@ -64,20 +65,25 @@ CREATE TABLE books (
     author_id TEXT,
     FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
-
+```
 2.	Create insert_data.sql file
+```
 insert into authors (author_id, first_name, last_name) values
 
 insert into books (book_id, title, year_published, author_id) values
+```
 
 3.	Create select_records.sql file
+```
 #select all records from the authors table
 select * from authors;
 
 #select all records from the books table
 select * from books;
+```
 
 4.	Create update_records.sql file
+```
 #update records in the authors table where first name contains 'F. Scott'
 
 update authors
@@ -88,8 +94,10 @@ where first = 'F. Scott';
 
 set title = 'The Great Mountains'
 where year_published = '1960';
+```
 
 5.	Create delete_records.sql file
+```
 #delete records from the authors table where first name is Albert 
 delete from authors
 where first = 'Albert';
@@ -97,8 +105,10 @@ where first = 'Albert';
 #delete records from the books table where title is "The Great Mountains"
 delete from  books
 where title = 'The Great Mountains' ;
+```
 
 6.	Create query_aggregation.sql file
+```
 select 
 count(*) as total_books,
 avg(year_published) as average_year_published,
@@ -111,7 +121,9 @@ where first like 'j%';
 8.	Create query_sorting.sql file
 select * from books
 order by year_published desc;
+```
 9.	Create query_group_by.sql file
+```
 select year_published, count(*) as total_books
 from books
 group by year_published
@@ -120,6 +132,7 @@ order by year_published;
 select a.first, a.last, b.title, b.year_published
 from authors a
 inner join books b on a.author_id = b.author_id;
+```
 ## Git add and commit
 ```PowerShell
 git add .
