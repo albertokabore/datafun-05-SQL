@@ -1,81 +1,129 @@
-# datafun-05-SQL
 Project 5: datafun-05-sql-
-```powershell
 Title : Specification for Project 5 SQL Module
-```
-
-Albert Kabore, May 28, 2024
-
+Albert Kabore, May 31, 2024
 ## Overview
-## This project focuses on database interactions using SQLite, combining the power of Python and SQL. It introduces logging as a useful tool for debugging and monitoring. The project involves creating and managing a database, building a schema, and performing various SQL operations, including queries with joins, filters, and aggregations.
+# Project 5 integrates Python and SQL, focusing on database interactions using SQLite. This project introduces logging, a useful tool for debugging and monitoring projects, and involves creating and managing a database, building a schema, and performing various SQL operations, including queries with joins, filters, and aggregations.
 
-## Objectives
-## Create a Python script that demonstrates the ability to interact with a SQL database, including creating a database, defining a schema, and executing various SQL commands. Incorporate logging to document the process and provide user feedback.
-
-## Create GitHub Repository and clone to VS Code
-# create GitHub repository
-
- GitHub Repository: datafun-05-sql
- ## Documentation: README.md
-## clone to VS Code
-```powershell
+# Objectives
+# Create a Python script that demonstrates the ability to interact with a SQL database, including creating a database, defining a schema, and executing various SQL commands. Incorporate logging to document the process and provide user feedback.
+# Create GitHub Repository and clone to VS Code
+```PowerShell
 git clone https://github.com/albertokabore/datafun-05-SQL
 ```
-
-```powershell
-git clone site_URL
+#create GitHub repository
+ GitHub Repository: datafun-05-sql-
+ ## Documentation: README.me
+ ```PowerShell
+Initialize script: db_initialize_Albertkabore.py
+ Operations script: db_operations_Albertkabore.py
 ```
 ## Adding files
-## Add a .py file to work in.
-## Add a requirements.txt file to hold the required project modules.
-## Create a .venv to act as the virtual environment.
-## Include a .gitignore file to exclude the .venv file from the rest of the Python environment.
+•	Add a .py file to work in.
+•	Add a requirements.txt file to hold the required project modules.
+•	Create a .venv to act as the virtual environment.
+•	Include a .gitignore file to exclude the .venv file from the rest of the Python environment.
 ## Create Project Virtual Environment
- ```powershell
- py -m venv .venv
+ ```PowerShell
+py -m venv .venv
 source .\.venv\Scripts\activate
 ```
 ## Install all Required Packages
-```powershell
- py -m pip install pandas pyarrow
+ ```PowerShell
+py -m pip install pandas pyarrow
  py -m pip freeze > requirements.txt
- ```
-## import Dependencies
 
-```powershell
+```
+## import Dependencies
+```python
 import sqlite3
 import pandas as pd
 import pathlib
 ```
-## Create Database(db)
- ## Define the database file in the current root project directory
- 
- ```powershell
- db_file = pathlib.Path("project.sqlite3")
-
-def create_database():
-    """Function to create a database. Connecting for the first time
-    will create a new database file if it doesn't exist yet.
-    Close the connection after creating the database
-    to avoid locking the file."""
-    try:
-        conn = sqlite3.connect(db_file)
-        conn.close()
-        print("Database created successfully.")
-    except sqlite3.Error as e:
-        print("Error creating the database:", e)
-
-def main():
-    create_database()
-
-if __name__ == "__main__":
-    main()
-```
 ## Git add and commit
-```powershell
+```PowerShell
 git add .
 git commit -m "initial commit"
 git push origin main
 ```
-Source
+## Add Folder and files
+Add a data folder to the project folder, then added two .csv files (authors and books) in VS Code.
+Add book_manager.py file to create a database, and fill with inofrmation from CSV files. 
+## Worked on Different SQL Operations
+Implement SQL statements and queries to perform additional operations and use Python to execute SQL statements.
+1.	Create create_tables.sql
+CREATE TABLE authors (
+    author_id TEXT PRIMARY KEY,
+    first TEXT,
+    last TEXT
+);
+CREATE TABLE books (
+    book_id TEXT PRIMARY KEY,
+    title TEXT,
+    year_published INTEGER,
+    author_id TEXT,
+    FOREIGN KEY (author_id) REFERENCES authors(author_id)
+);
+2.	Create insert_data.sql file
+insert into authors (author_id, first_name, last_name) values
+
+insert into books (book_id, title, year_published, author_id) values
+
+3.	Create select_records.sql file
+#select all records from the authors table
+select * from authors;
+
+#select all records from the books table
+select * from books;
+4.	Create update_records.sql file
+#update records in the authors table where first name contains 'F. Scott'
+
+update authors
+set first = 'Albert', last = 'Kabore'
+where first = 'F. Scott';
+
+#update records in the books table where year_published is 1960
+
+set title = 'The Great Mountains'
+where year_published = '1960';
+5.	Create delete_records.sql file
+#delete records from the authors table where first name is Albert 
+delete from authors
+where first = 'Albert';
+
+#delete records from the books table where title is "The Great Mountains"
+delete from  books
+where title = 'The Great Mountains' ;
+6.	Create query_aggregation.sql file
+select 
+count(*) as total_books,
+avg(year_published) as average_year_published,
+min(year_published) as earliset_year,
+max(year_published) as latest_year 
+from books;
+7.	Create query_filter.sql files
+select first, last from authors 
+where first like 'j%';
+8.	Create query_sorting.sql file
+select * from books
+order by year_published desc;
+9.	Create query_group_by.sql file
+select year_published, count(*) as total_books
+from books
+group by year_published
+order by year_published;
+10.	Create query_join.sql file
+select a.first, a.last, b.title, b.year_published
+from authors a
+inner join books b on a.author_id = b.author_id;
+## Git add and commit
+```PowerShell
+git add .
+git commit -m "initial commit"
+git push origin main
+```
+## Source
 This project was built to the following specifications: https://github.com/denisecase/datafun-05-spec
+
+
+
+
