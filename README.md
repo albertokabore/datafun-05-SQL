@@ -115,9 +115,12 @@ avg(year_published) as average_year_published,
 min(year_published) as earliset_year,
 max(year_published) as latest_year 
 from books;
+```
 7.	Create query_filter.sql files
+```
 select first, last from authors 
 where first like 'j%';
+```
 8.	Create query_sorting.sql file
 select * from books
 order by year_published desc;
@@ -128,7 +131,9 @@ select year_published, count(*) as total_books
 from books
 group by year_published
 order by year_published;
+```
 10.	Create query_join.sql file
+```
 select a.first, a.last, b.title, b.year_published
 from authors a
 inner join books b on a.author_id = b.author_id;
