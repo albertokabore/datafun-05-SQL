@@ -50,6 +50,7 @@ Add a data folder to the project folder, then added two .csv files (authors and 
 Add book_manager.py file to create a database, and fill with inofrmation from CSV files. 
 ## Worked on Different SQL Operations
 Implement SQL statements and queries to perform additional operations and use Python to execute SQL statements.
+
 1.	Create create_tables.sql
 CREATE TABLE authors (
     author_id TEXT PRIMARY KEY,
@@ -63,6 +64,7 @@ CREATE TABLE books (
     author_id TEXT,
     FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
+
 2.	Create insert_data.sql file
 insert into authors (author_id, first_name, last_name) values
 
@@ -74,6 +76,7 @@ select * from authors;
 
 #select all records from the books table
 select * from books;
+
 4.	Create update_records.sql file
 #update records in the authors table where first name contains 'F. Scott'
 
@@ -85,6 +88,7 @@ where first = 'F. Scott';
 
 set title = 'The Great Mountains'
 where year_published = '1960';
+
 5.	Create delete_records.sql file
 #delete records from the authors table where first name is Albert 
 delete from authors
@@ -93,6 +97,7 @@ where first = 'Albert';
 #delete records from the books table where title is "The Great Mountains"
 delete from  books
 where title = 'The Great Mountains' ;
+
 6.	Create query_aggregation.sql file
 select 
 count(*) as total_books,
