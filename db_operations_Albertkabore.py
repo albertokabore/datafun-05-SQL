@@ -1,24 +1,10 @@
-'''Module 5 SQL Project
-Author: Albert Kabore
-Objective: Create a Python script that demonstrates the ability to interact with a SQL database, 
-including creating a database, defining a schema, and executing various SQL commands. 
-Incorporate logging to document the process and provide user feedback. 
-'''
-## Import Standard Dependencies
-import csv
-import pathlib
 import sqlite3
-import uuid
-import logging
-
-# Import Local Dependencies
 import pandas as pd
-import pyarrow
+import pathlib
 
-# Define database file in the root project folder
-db_file = pathlib.Path("project.db")
+# Define the database file in the current root project directory
+db_file = "C:\Users\alber\datafun-05-SQL\project.db"
 
-# Define function to insert records from a CSV
 def insert_data_from_csv():
     """Function to use pandas to read data from CSV files (in 'data' folder)
     and insert the records into their respective tables."""
@@ -28,105 +14,161 @@ def insert_data_from_csv():
         authors_df = pd.read_csv(author_data_path)
         books_df = pd.read_csv(book_data_path)
         with sqlite3.connect(db_file) as conn:
-            # use the pandas DataFrame to_sql() method to insert data
-            # pass in the table name and the connection
+            # Use the pandas DataFrame to_sql() method to insert data
+            # Pass in the table name and the connection
             authors_df.to_sql("authors", conn, if_exists="replace", index=False)
             books_df.to_sql("books", conn, if_exists="replace", index=False)
             print("Data inserted successfully.")
     except (sqlite3.Error, pd.errors.EmptyDataError, FileNotFoundError) as e:
-        print("Error inserting data:", e)
+        print("Error inserting data from CSV:", e)
 
-# Define function for inserting new records to the data tables
-def execute_insert_records(db_file, insert_records_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        insert_records_sql_file = pathlib.Path("insert_records.sql")
-        with open(insert_records_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {insert_records_sql_file}")
+def insert_records():
+    """Function to read and execute SQL statements to insert data"""
+    try:
+        with sqlite3.connect(db_file) as conn:
+            sql_file = "C:\\Users\\AnjanaD\\Documents\\datafun-05-sql-\\insert_records.sql"
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            conn.executescript(sql_script)
+            print("Data inserted successfully.")
+    except sqlite3.Error as e:
+        print("Error inserting data from SQL:", e)
 
-# Define function for deleting records from the data tables
-def execute_delete_records(db_file, delete_records_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        delete_records_sql_file = pathlib.Path("delete_records.sql")
-        with open(delete_records_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {delete_records_sql_file}")
+def update_records():
+    """Function to update one or more records in the authors table"""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("update_records.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            conn.executescript(sql_script)
+            print("Records updated successfully.")
+    except sqlite3.Error as e:
+        print("Error updating records:", e)
 
-# Define function for updating records from the data tables
-def execute_update_records(db_file, update_records_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        update_records_sql_file = pathlib.Path("update_records.sql")
-        with open(update_records_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {update_records_sql_file}")
+        
+def select_records():
+    """Function to update one or more records in the authors table"""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("select_records.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            conn.executescript(sql_script)
+            print("Records read successfully.")
+    except sqlite3.Error as e:
+        print("Error reading records:", e)
 
-# Define function for performing operations on data from tables
-def execute_query_aggregation(db_file, query_aggregation_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        query_aggregation_sql_file = pathlib.Path("query_aggregation.sql")
-        with open(query_aggregation_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {query_aggregation_sql_file}")
 
-# Define function for filtering data from tables
-def execute_query_filter(db_file, query_filter_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        query_filter_sql_file = pathlib.Path("query_filter.sql")
-        with open(query_filter_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {query_filter_sql_file}")
+def delete_records():
+    """Function to delete one or more records in the authors table"""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("delete_records.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            conn.executescript(sql_script)
+            print("Records deleted successfully.")
+    except sqlite3.Error as e:
+        print("Error deleting records:", e)
 
-# Define function for grouping data from tables
-def execute_query_group_by(db_file, query_group_by_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        query_group_by_sql_file = pathlib.Path("query_group_by.sql")
-        with open(query_group_by_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {query_group_by_sql_file}")
+def query_aggregation():
+    """Function to perform aggregation functions on the books table"""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("query_aggregation.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            cursor = conn.execute(sql_script)
+            result = cursor.fetchone()
+            print("total_books:", result[0])
+            print("average_year_published:", round(result[1]))
+            print("earliest_year:", round(result[2]), "characters.")
+            print("latest_year:", round(result[2]), "characters.")
+    except sqlite3.Error as e:
+        print("Error querying aggregation for books:", e)
 
-# Define function for combining data from 2 tables
-def execute_query_join(db_file, query_join_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        query_join_sql_file = pathlib.Path("query_join.sql")
-        with open(query_join_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {query_join_sql_file}")
+def query_filter():
+    """Function to filter authors data based on conditions"""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("query_filter.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            cursor = conn.execute(sql_script)
+            results = cursor.fetchall()
+            for row in results:
+                print(row)  
+    except sqlite3.Error as e:
+        print("Error filtering book data:", e)
 
-# Define function for sorting data in tables
-def execute_query_sorting(db_file, query_sorting_sql_file):
-    with sqlite3.connect(db_file) as conn:
-        query_sorting_sql_file = pathlib.Path("query_sorting.sql")
-        with open(query_sorting_sql_file, 'r') as file:
-            sql_script = file.read()
-        conn.executescript(sql_script)
-        print(f"Executed SQL from {query_sorting_sql_file}")
+def query_sorting():
+    """Function to sort book data based on publication date"""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("query_sorting.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            cursor = conn.execute(sql_script)
+            books = cursor.fetchall()
+            for book in books:
+                print(book[1], book[2])  # Print title and year_published 
+    except sqlite3.Error as e:
+        print("Error sorting book data:", e)
 
+def query_group_by():
+    """Function to execute SQL query with GROUP BY clause and display the count of each grouping."""
+    try:
+        db_file = pathlib.Path("project.db")
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("query_group_by.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            cursor = conn.cursor()
+            cursor.execute(sql_script)
+            results = cursor.fetchall()
+            column_names = [description[0] for description in cursor.description]
+            print(" | ".join(column_names))
+            print("-" * (len(" | ".join(column_names)) + 10))
+            for row in results:
+             print(" | ".join(map(str, row))) 
+    except sqlite3.Error as e:
+        print("Error executing query:", e)
+
+def query_join():
+    """Function to read and execute SQL statements to perform INNER JOIN and display the results"""
+    try:
+        with sqlite3.connect(db_file) as conn:
+            sql_file = pathlib.Path("query_join.sql")
+            with open(sql_file, "r") as file:
+                sql_script = file.read()
+            cursor = conn.execute(sql_script)
+            results = cursor.fetchall()
+            column_names = [description[0] for description in cursor.description]
+            print(" | ".join(column_names))
+            print("-" * (len(" | ".join(column_names)) + 10))
+            for row in results:
+             print(" | ".join(map(str, row)))
+    except sqlite3.Error as e:
+        print("Error executing query:", e)      
 
 def main():
-
-    # Create database schema and populate with data
-    execute_insert_records(db_file, 'insert_records.sql')
-    execute_delete_records(db_file, 'delete_records.sql')
-    execute_update_records(db_file, 'update_records.sql')
-    execute_query_aggregation(db_file, 'query_aggregation.sql')
-    execute_query_filter(db_file, 'query_filter.sql')
-    execute_query_group_by(db_file, 'query_group_by.sql')
-    execute_query_join(db_file, 'query_join.sql')
-    execute_query_sorting(db_file, 'query_sorting.sql')
-
-    logging.info("All SQL operations completed successfully")
-
-    
+    insert_data_from_csv()
+    insert_records()
+    update_records()
+    select_records()
+    delete_records()
+    query_aggregation()
+    query_filter()
+    query_sorting()
+    query_group_by()
+    query_join()
 
 if __name__ == "__main__":
-    logging.info("Program started") # add this at the beginning of the main method
     main()
-    logging.info("Program ended")  # add this at the end of the main method
-
