@@ -74,6 +74,7 @@ insert into books (book_id, title, year_published, author_id) values
 ```
 
 3.	Create select_records.sql file
+
 ```
 #select all records from the authors table
 select * from authors;
@@ -83,6 +84,7 @@ select * from books;
 ```
 
 4.	Create update_records.sql file
+
 ```
 #update records in the authors table where first name contains 'F. Scott'
 
@@ -97,8 +99,8 @@ where year_published = '1960';
 ```
 
 5.	Create delete_records.sql file
-```
-#delete records from the authors table where first name is Albert 
+
+```#delete records from the authors table where first name is Albert 
 delete from authors
 where first = 'Albert';
 
@@ -108,8 +110,8 @@ where title = 'The Great Mountains' ;
 ```
 
 6.	Create query_aggregation.sql file
-```
-select 
+
+```select 
 count(*) as total_books,
 avg(year_published) as average_year_published,
 min(year_published) as earliset_year,
@@ -117,15 +119,17 @@ max(year_published) as latest_year
 from books;
 ```
 7.	Create query_filter.sql files
-```
-select first, last from authors 
+
+```select first, last from authors 
 where first like 'j%';
 ```
 8.	Create query_sorting.sql file
-select * from books
+
+```select * from books
 order by year_published desc;
 ```
 9.	Create query_group_by.sql file
+
 ```
 select year_published, count(*) as total_books
 from books
@@ -133,6 +137,7 @@ group by year_published
 order by year_published;
 ```
 10.	Create query_join.sql file
+
 ```
 select a.first, a.last, b.title, b.year_published
 from authors a
